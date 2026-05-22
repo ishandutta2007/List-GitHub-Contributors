@@ -9,22 +9,16 @@
 <body>
     <div class="container">
         <h1>GitHub Contributor Fetcher</h1>
-        <p class="subtitle">Enter repository details or leave blank for defaults</p>
+        <p class="subtitle">Enter one repository per line (owner/repo) or leave blank for defaults</p>
         
-        <div class="form-group">
-            <input type="text" id="owner" placeholder="Owner (e.g. ishandutta2007)" autocomplete="off">
-            <input type="text" id="repo" placeholder="Repo (e.g. Top-AI-repos)" autocomplete="off">
-            <button id="fetch-btn">Fetch Contributors</button>
+        <div class="form-group vertical">
+            <textarea id="repos-input" rows="5" placeholder="psf/requests&#10;encode/fastapi" autocomplete="off"></textarea>
+            <button id="fetch-btn">Fetch All Contributors</button>
         </div>
 
         <div id="status" class="status"></div>
 
-        <div class="results-container">
-            <div class="results-header">
-                <span id="count">0</span> Contributors Found
-            </div>
-            <ul id="contributor-list"></ul>
-        </div>
+        <div id="results-area" class="results-area"></div>
     </div>
     <script src="/static/script.js"></script>
 </body>

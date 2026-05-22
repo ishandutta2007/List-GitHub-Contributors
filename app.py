@@ -1,7 +1,8 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from fetch_github_contributors import get_contributors, save_to_file
+from fetch_github_contributors import get_contributors, save_to_file, DEFAULT_REPOS
+from typing import List, Optional
 import os
 
 app = FastAPI()
@@ -18,16 +19,41 @@ async def read_index():
 
 @app.get("/api/contributors")
 async def fetch_contributors(
-    owner: str = Query(None),
-    repo: str = Query(None)
+    repos: Optional[List[str]] = Query(None)
 ):
-    # If parameters are empty strings or None, they will fallback in the get_contributors function
-    usernames = get_contributors(owner=owner or None, repo=repo or None)
+    # Determine repo list
+    repo_list = []
+    if repos:
+        for r in repos:
+            if '/' in r:
+                owner, repo = r.split('/', 1)
+                repo_list.append((owner.strip(), repo.strip()))
     
-    # Save to file as requested
-    save_to_file(usernames)
-    
-    return {"usernames": usernames, "count": len(usernames)}
+    # Fallback to defaults if no valid repos provided
+    if not repo_list:
+        repo_list = DEFAULT_REPOS
+
+    # Clear file first for a fresh batch
+    open("contributors.txt", "w").close()
+
+    results = []
+    for owner, repo in repo_list:
+        usernames = get_contributors(owner, repo)
+        if usernames:
+            save_to_file(usernames, append=True)
+            results.append({
+                "repo": f"{owner}/{repo}",
+                "usernames": usernames,
+                "count": len(usernames)
+            })
+        else:
+            results.append({
+                "repo": f"{owner}/{repo}",
+                "usernames": [],
+                "count": 0
+            })
+
+    return {"results": results}
 
 if __name__ == "__main__":
     import uvicorn
