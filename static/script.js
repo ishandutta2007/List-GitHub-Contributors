@@ -11,6 +11,7 @@ document.getElementById('fetch-btn').addEventListener('click', async () => {
     // Reset UI
     statusDiv.textContent = 'Processing repositories...';
     statusDiv.style.color = 'inherit';
+    statusDiv.style.background = 'transparent';
     resultsArea.innerHTML = '';
     btn.disabled = true;
 
@@ -31,16 +32,23 @@ document.getElementById('fetch-btn').addEventListener('click', async () => {
         const data = await response.json();
         
         if (data.results && data.results.length > 0) {
+            statusDiv.textContent = 'Results loaded successfully';
+            statusDiv.style.color = 'var(--success)';
+            statusDiv.style.background = '#e6ffec';
+            
             if (data.using_defaults) {
                 const notice = document.createElement('div');
                 notice.className = 'default-notice';
-                notice.textContent = 'No input provided. Showing results for the default repository (ishandutta2007/Top-AI-repos).';
+                notice.innerHTML = '<strong>Note:</strong> No input provided. Using default repository (ishandutta2007/Top-AI-repos).';
                 resultsArea.appendChild(notice);
             }
 
-            data.results.forEach(res => {
+            data.results.forEach((res, index) => {
                 const section = document.createElement('div');
                 section.className = 'repo-section';
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(10px)';
+                section.style.transition = `all 0.3s ease ${index * 0.1}s`;
 
                 const header = document.createElement('div');
                 header.className = 'repo-header';
@@ -65,9 +73,15 @@ document.getElementById('fetch-btn').addEventListener('click', async () => {
                 }
                 section.appendChild(list);
                 resultsArea.appendChild(section);
+                
+                // Trigger animation
+                setTimeout(() => {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, 50);
             });
-            statusDiv.textContent = 'All batches completed successfully!';
-            statusDiv.style.color = '#2ea44f';
+            statusDiv.textContent = 'Batch results displayed below.';
+            statusDiv.style.color = 'var(--success)';
         } else {
             statusDiv.textContent = 'No data returned.';
             statusDiv.style.color = '#cf222e';

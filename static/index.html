@@ -5,20 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Contributor Fetcher</title>
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>GitHub Contributor Fetcher</h1>
-        <p class="subtitle">Enter one repository per line (owner/repo) or leave blank for defaults</p>
+        <header>
+            <h1>Contributor Fetcher</h1>
+            <p class="subtitle">Analyze GitHub repositories and extract contributor data with ease.</p>
+        </header>
         
         <div class="form-group vertical">
-            <textarea id="repos-input" rows="5" placeholder="psf/requests&#10;encode/fastapi&#10;ishandutta2007/Top-AI-repos" autocomplete="off"></textarea>
+            <div class="input-wrapper">
+                <textarea id="repos-input" rows="5" placeholder="owner/repo (e.g. psf/requests)&#10;one per line..." autocomplete="off"></textarea>
+            </div>
             
             <div class="options-group">
                 <label class="switch-label">
                     <input type="checkbox" id="append-mode">
-                    <span class="slider"></span>
-                    <span class="label-text">Append to contributors.txt (instead of overwrite)</span>
+                    <span class="label-text">Append to contributors.txt</span>
                 </label>
             </div>
 
