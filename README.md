@@ -110,4 +110,10 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
+### 📈 Project Velocity
+
+![Star History Chart](https://api.star-history.com/chart?repos=ishandutta2007/List-GitHub-Contributors&type=date&theme=dark)
+
+---
+
 Developed with ❤️ by [ishandutta2007](https://github.com/ishandutta2007)
