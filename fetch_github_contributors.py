@@ -6,8 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 # Default list of (owner, repo) pairs
 DEFAULT_REPOS = [
-    ('ishandutta2007', 'Top-AI-repos'),
-    ('psf', 'requests')
+    ('ishandutta2007', 'Top-AI-repos')
 ]
 ADMIN_TOKEN = os.getenv("ADMIN_TOKEN")
 

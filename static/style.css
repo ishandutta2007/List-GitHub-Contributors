@@ -92,6 +92,17 @@ button:disabled {
     min-height: 20px;
 }
 
+.default-notice {
+    background-color: #fff8c5;
+    border: 1px solid rgba(190, 147, 10, 0.3);
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #735c0f;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
 .results-area {
     display: flex;
     flex-direction: column;

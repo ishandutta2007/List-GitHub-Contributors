@@ -30,6 +30,13 @@ document.getElementById('fetch-btn').addEventListener('click', async () => {
         const data = await response.json();
         
         if (data.results && data.results.length > 0) {
+            if (data.using_defaults) {
+                const notice = document.createElement('div');
+                notice.className = 'default-notice';
+                notice.textContent = 'No input provided. Showing results for the default repository (ishandutta2007/Top-AI-repos).';
+                resultsArea.appendChild(notice);
+            }
+
             data.results.forEach(res => {
                 const section = document.createElement('div');
                 section.className = 'repo-section';

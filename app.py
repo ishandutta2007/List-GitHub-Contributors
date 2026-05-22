@@ -30,8 +30,10 @@ async def fetch_contributors(
                 repo_list.append((owner.strip(), repo.strip()))
     
     # Fallback to defaults if no valid repos provided
+    using_defaults = False
     if not repo_list:
         repo_list = DEFAULT_REPOS
+        using_defaults = True
 
     # Clear file first for a fresh batch
     open("contributors.txt", "w").close()
@@ -53,7 +55,7 @@ async def fetch_contributors(
                 "count": 0
             })
 
-    return {"results": results}
+    return {"results": results, "using_defaults": using_defaults}
 
 if __name__ == "__main__":
     import uvicorn
