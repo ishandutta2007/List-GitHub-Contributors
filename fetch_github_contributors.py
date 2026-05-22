@@ -56,8 +56,12 @@ def save_to_file(usernames, filename="contributors.txt", append=False):
     return True
 
 if __name__ == "__main__":
-    # Clear file first in CLI mode
-    open("contributors.txt", "w").close()
+    import sys
+    append_flag = "--append" in sys.argv
+
+    # Clear file first if NOT in append mode
+    if not append_flag:
+        open("contributors.txt", "w").close()
     
     total_found = 0
     for owner, repo in DEFAULT_REPOS:

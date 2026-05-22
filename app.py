@@ -19,7 +19,8 @@ async def read_index():
 
 @app.get("/api/contributors")
 async def fetch_contributors(
-    repos: Optional[List[str]] = Query(None)
+    repos: Optional[List[str]] = Query(None),
+    append: bool = Query(False)
 ):
     # Determine repo list
     repo_list = []
@@ -35,8 +36,9 @@ async def fetch_contributors(
         repo_list = DEFAULT_REPOS
         using_defaults = True
 
-    # Clear file first for a fresh batch
-    open("contributors.txt", "w").close()
+    # Clear file first if NOT in append mode
+    if not append:
+        open("contributors.txt", "w").close()
 
     results = []
     for owner, repo in repo_list:

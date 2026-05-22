@@ -1,5 +1,6 @@
 document.getElementById('fetch-btn').addEventListener('click', async () => {
     const reposInput = document.getElementById('repos-input').value.trim();
+    const appendMode = document.getElementById('append-mode').checked;
     const statusDiv = document.getElementById('status');
     const resultsArea = document.getElementById('results-area');
     const btn = document.getElementById('fetch-btn');
@@ -14,11 +15,11 @@ document.getElementById('fetch-btn').addEventListener('click', async () => {
     btn.disabled = true;
 
     try {
-        let url = '/api/contributors';
+        let url = `/api/contributors?append=${appendMode}`;
         if (repos.length > 0) {
             const params = new URLSearchParams();
             repos.forEach(r => params.append('repos', r));
-            url += `?${params.toString()}`;
+            url += `&${params.toString()}`;
         }
 
         const response = await fetch(url);

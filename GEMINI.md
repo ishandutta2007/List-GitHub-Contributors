@@ -35,15 +35,20 @@ A utility to fetch and list contributors for multiple GitHub repositories using 
    ```
 2. Open your browser and navigate to `http://localhost:8000`.
 3. Enter repositories in `owner/repo` format (one per line).
+4. Use the **"Append to contributors.txt"** toggle to control whether the file is overwritten or appended to.
 
 ### Running the CLI
 Run the script to process the default list of repositories:
 ```bash
+# To overwrite contributors.txt
 python fetch_github_contributors.py
+
+# To append to contributors.txt
+python fetch_github_contributors.py --append
 ```
 
 ## Development Conventions
 - **Batch Processing:** Both CLI and UI support processing multiple repositories in a single run.
-- **File Output:** Usernames are appended to `contributors.txt` during the batch run. The file is cleared at the start of each new batch.
+- **File Output:** By default, `contributors.txt` is cleared at the start of a run. If the append flag is active, results are added to the existing file.
 - **UI Grouping:** Results in the web UI are visually grouped by repository for clarity.
 - **Fallback Logic:** Uses `DEFAULT_REPOS` in `fetch_github_contributors.py` if no input is provided.
