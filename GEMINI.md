@@ -6,8 +6,9 @@ A simple Python utility to fetch and list contributors for a GitHub repository u
 - **Libraries:** `requests`, `python-dotenv`
 
 ## Architecture
-- `fetch_github_contributors.py`: Main script containing the logic to interact with GitHub's API, handle pagination, and print contributor data.
+- `fetch_github_contributors.py`: Main script containing the logic to interact with GitHub's API, handle pagination, and save contributor usernames to a file.
 - `.env`: (Required) Stores the `ADMIN_TOKEN` for authenticated requests to avoid rate limits.
+- `contributors.txt`: (Generated) Contains the list of GitHub usernames, one per line.
 
 ## Setup and Running
 
@@ -29,6 +30,7 @@ Run the script using:
 ```bash
 python fetch_github_contributors.py
 ```
+The script will fetch the contributors and save their usernames to `contributors.txt`.
 
 ## Development Conventions
 - **API Interaction:** Uses GitHub REST API v3.

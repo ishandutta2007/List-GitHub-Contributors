@@ -1,7 +1,6 @@
 import requests
 import os
 import time
-import requests
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -38,9 +37,13 @@ def get_contributors(owner, repo, token=None):
         
     return contributors
 
-# Example Usage
-repo_owner = "psf"
-repo_name = "requests"
-# To print the contributors, you can follow this Medium guide:
-# 
-print(get_contributors(OWNER, REPO, ADMIN_TOKEN))
+if __name__ == "__main__":
+    contributors_data = get_contributors(OWNER, REPO, ADMIN_TOKEN)
+    
+    if contributors_data:
+        with open("contributors.txt", "w") as f:
+            for contributor in contributors_data:
+                f.write(contributor['login'] + "\n")
+        print(f"Usernames successfully written to contributors.txt")
+    else:
+        print("No contributors found or an error occurred.")

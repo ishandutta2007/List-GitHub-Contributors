@@ -3,5 +3,4 @@ temp_repo_clone
 *.bk
 *.bak
 *.env
-to_be_invited.txt
-successful_invites.txt
+contributors.txt
