@@ -39,7 +39,7 @@ An automated tool to fetch, list, and analyze contributors for multiple GitHub r
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/List-GitHub-Contributors.git
+git clone https://github.com/ishandutta2007/List-GitHub-Contributors.git
 cd List-GitHub-Contributors
 ```
 
